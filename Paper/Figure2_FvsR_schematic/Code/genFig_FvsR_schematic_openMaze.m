@@ -12,9 +12,9 @@ params.s_start          = [3,1]; % beginning state (in matrix notation)
 params.s_start_rand     = false; % Start at random locations after reaching goal
 
 %% OVERWRITE PARAMETERS
-params.N_SIMULATIONS    = 1000; % number of times to run the simulation
+params.N_SIMULATIONS    = 1; % number of times to run the simulation
 params.MAX_N_STEPS      = 1e5; % maximum number of steps to simulate
-params.MAX_N_EPISODES   = 2; % maximum number of episodes to simulate (use Inf if no max) -> Choose between 20 and 100
+params.MAX_N_EPISODES   = 20; % maximum number of episodes to simulate (use Inf if no max) -> Choose between 20 and 100
 params.nPlan            = 20; % number of steps to do in planning (set to zero if no planning or to Inf to plan for as long as it is worth it)
 
 params.setAllGainToOne  = false; % Set the gain term of all items to one (for illustration purposes)
@@ -70,7 +70,7 @@ end
 
 for k=1:params.N_SIMULATIONS
     
-    simData(k) = replaySim(params);
+    simData(k) = replaySim_old(params);
     
     forwardEvents = [];
     reverseEvents = [];
@@ -232,7 +232,7 @@ for i=[thisChunk (thisChunk(end)+1)]
         set(gca, 'Clipping', 'off');
         set(gcf, 'Clipping', 'off');
         set(gcf, 'renderer', 'painters');
-        print(['../Parts/openMaze_forwardGain' num2str(j)],'-dpdf');
+        print(['D:\Documents\Perso\Figures_robotics\openMaze_forwardGain' num2str(j)],'-dpdf');
         pause(1);
     end
     j=j+1;
@@ -249,7 +249,7 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     set(gcf, 'renderer', 'painters');
     %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    print(['../Parts/openMaze_forwardNeed'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\openMaze_forwardNeed'],'-dpdf');
 end
 
 % Plot Replay trace
@@ -265,7 +265,7 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     set(gcf, 'renderer', 'painters');
     %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    print(['../Parts/openMaze_forwardTrace'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\openMaze_forwardTrace'],'-dpdf');
 end
 
 
@@ -310,7 +310,7 @@ for i=1:4
         set(gca, 'Clipping', 'off');
         set(gcf, 'Clipping', 'off');
         set(gcf, 'renderer', 'painters');
-        print(['../Parts/openMaze_reverseGain' num2str(i)],'-dpdf');
+        print(['D:\Documents\Perso\Figures_robotics\openMaze_reverseGain' num2str(i)],'-dpdf');
         pause(1);
     end
 end
@@ -327,7 +327,7 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     set(gcf, 'renderer', 'painters');
     %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    print(['../Parts/openMaze_reverseNeed'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\openMaze_reverseNeed'],'-dpdf');
 end
 
 % Plot Replay trace
@@ -343,6 +343,6 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     set(gcf, 'renderer', 'painters');
     %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    print(['../Parts/openMaze_reverseTrace'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\openMaze_reverseTrace'],'-dpdf');
 end
 

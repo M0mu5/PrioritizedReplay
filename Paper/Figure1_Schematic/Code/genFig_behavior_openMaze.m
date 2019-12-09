@@ -15,7 +15,7 @@ params.rewSTD           = 0.1; % reward Gaussian noise (rows: locations; columns
 params.rewProb          = 1; % probability of receiving each reward (columns: values)
 
 %% OVERWRITE PARAMETERS
-params.N_SIMULATIONS    = 1000; % number of times to run the simulation
+params.N_SIMULATIONS    = 30; % number of times to run the simulation
 params.MAX_N_STEPS      = 1e5; % maximum number of steps to simulate
 params.MAX_N_EPISODES   = 50; % maximum number of episodes to simulate (use Inf if no max)
 params.nPlan            = 20; % number of steps to do in planning (set to zero if no planning or to Inf to plan for as long as it is worth it)
@@ -129,19 +129,19 @@ for s=1:size(nextState,1)
     end
 end
 
-% Find shortest path between all pairs of nodes
-dist = nan(numel(params.maze),numel(params.maze));
-for s1=1:size(nextState,1)
-    for s2=1:size(nextState,1)
-        dist(s1,s2) = graphshortestpath(sparse(A),s1,s2);
-    end
-end
+% % Find shortest path between all pairs of nodes
+% dist = nan(numel(params.maze),numel(params.maze));
+% for s1=1:size(nextState,1)
+%     for s2=1:size(nextState,1)
+%         dist(s1,s2) = graphshortestpath(sparse(A),s1,s2);
+%     end
+% end
 
 % Pick next start state at random
 validStates = find(params.maze==0); % can start at any non-wall state
 goalState = sub2ind(size(params.maze),params.s_end(:,1),params.s_end(:,2));
 validStates = validStates(~ismember(validStates,goalState)); %... but remove the goal states from the list
-chanceLevel = nanmean(dist(validStates,goalState));
+% chanceLevel = nanmean(dist(validStates,goalState));
 
 
 %% PLOT RESULTS
@@ -160,7 +160,7 @@ legend({'No replay', 'DYNA', 'Prioritized replay'})
 h=gcf;
 h.Children(2).XTick = 0:5:20; xlim([0 20]);
 h.Children(2).YTick = 0:50:200; ylim([0 200]);
-l1 = line(xlim,[chanceLevel chanceLevel]);
+% l1 = line(xlim,[chanceLevel chanceLevel]);
 f1.LineWidth=1;
 f2.LineWidth=1;
 %f3.LineWidth=1;
@@ -168,7 +168,7 @@ f4.LineWidth=1;
 l1.LineWidth=1; l1.LineStyle=':'; l1.Color=[0 0 0];
 ylabel('Number of steps to reward');
 xlabel('# Episodes');
-title('Learning performance');
+title('Learning performance (30 simulations)');
 
 subplot(1,2,2)
 f1=plot(stepsBestPolicy_NoReplay);
@@ -197,6 +197,7 @@ set(gcf,'Position',[1    81   983   281]);
 
 %% EXPORT FIGURE
 if saveBool
+    savefig genFig_behavior_openMaze.fig
     save genFig_behavior_openMaze.mat
 
     % Set clipping off

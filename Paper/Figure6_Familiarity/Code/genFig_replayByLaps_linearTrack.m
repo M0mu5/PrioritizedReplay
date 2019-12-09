@@ -1,4 +1,4 @@
-load_existing_data = true;
+load_existing_data = false;
 addpath('../../../');
 
 if load_existing_data
@@ -255,7 +255,7 @@ end
 %% PLOT RESULTS
 
 % 1. Probability of replay
-figure(1); clf;
+figure(1);
 subplot(2,3,1);
 h=plot(1:50,nanmean(forwardCount+reverseCount,1));
 set(h,'LineWidth',1)
@@ -311,7 +311,7 @@ actProb_byReplay_forward = actProb_byReplay_forward(validStates,:,:);
 actProb_byReplay_reverse = actProb_byReplay_reverse(validStates,:,:);
 actProb_byEpisode = actProb_byEpisode(validStates,:,:);
 
-figure(2); clf;
+figure(2);
 subplot(2,2,1);
 h=plot(1:50,nanmean(nanmean(actProb_byEpisode,3),1));
 set(h,'LineWidth',1)
@@ -346,7 +346,7 @@ set(gcf,'Position',[964   244   748   503])
 % 3. Gain and Need
 
 episodes2plot = 1:50;
-figure(3); clf;
+figure(3);
 %avGain_byEpisode(avGain_byEpisode<(10*params.minGain))=nan;
 
 subplot(4,2,1);

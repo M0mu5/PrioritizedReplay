@@ -1,9 +1,9 @@
 load_existing_data = true;
 addpath('../../../');
 
-if load_existing_data
-    %load('../../Figure3_FvsR_balance/Code/genFig_FvsR_linearTrack.mat','simData','params')
-else
+% if load_existing_data
+%     load('../../Figure3_FvsR_balance/Code/genFig_FvsR_linearTrack.mat','simData','params')
+% else
     %% STATE-SPACE PARAMETERS
     setParams;
     params.maze             = zeros(3,10); % zeros correspond to 'visitable' states
@@ -35,7 +35,7 @@ else
     for k=1:params.N_SIMULATIONS
         simData(k) = replaySim(params);
     end
-end
+% end
 
 saveStr = input('Do you want to produce figures (y/n)? ','s');
 if strcmp(saveStr,'y')

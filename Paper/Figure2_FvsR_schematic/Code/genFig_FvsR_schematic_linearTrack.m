@@ -38,7 +38,7 @@ end
 %% RUN SIMULATION
 rng(mean('replay'));
 for k=1:params.N_SIMULATIONS
-    simData(k) = replaySim(params);
+    simData(k) = replaySim_old(params);
 end
 
 
@@ -49,7 +49,6 @@ end
 stateNumbers = reshape(1:numel(params.maze(:)),size(params.maze,1),size(params.maze,2));
 startStates = sub2ind(size(params.maze),params.s_start(:,1),params.s_start(:,2));
 goalStates = sub2ind(size(params.maze),params.s_end(:,1),params.s_end(:,2));
-
 
 %% REVERSE REPLAY
 
@@ -93,7 +92,7 @@ for i=1:4
         set(gcf, 'Clipping', 'off');
         set(gcf, 'renderer', 'painters');
         %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-        print(['../Parts/linearTrack_reverseGain' num2str(i)],'-dpdf');
+        print(['D:\Documents\Perso\Figures_robotics\linearTrack_reverseGain' num2str(i)],'-dpdf');
         pause(1);
     end
 end
@@ -110,7 +109,7 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     set(gcf, 'renderer', 'painters');
     %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    print(['../Parts/linearTrack_reverseNeed'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\linearTrack_reverseNeed'],'-dpdf');
 end
 
 % Plot Replay trace
@@ -126,14 +125,14 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     set(gcf, 'renderer', 'painters');
     %export_fig(['../Parts/reverse' num2str(i)], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    print(['../Parts/linearTrack_reverseTrace'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\linearTrack_reverseTrace'],'-dpdf');
 end
 
 if saveBool
     figure(4);
     colormap(map);
     colorbar;
-    print(['../Parts/linearTrack_colorbar'],'-dpdf');
+    print(['D:\Documents\Perso\Figures_robotics\linearTrack_colorbar'],'-dpdf');
 end
 
 

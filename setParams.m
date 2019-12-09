@@ -1,11 +1,17 @@
 %% SIMULATION PARAMETERS
 params.MAX_N_STEPS      = 1e5; % maximum number of steps to simulate
-params.MAX_N_EPISODES   = 50; % maximum number of episodes to simulate (use Inf if no max)
+params.MAX_N_EPISODES   = 10; % maximum number of episodes to simulate (use Inf if no max)
 
+params.rewOnlyPositive  = true;
+params.rewMag           = 1; % reward magnitude (can be a vector)
+params.rewSTD           = 0.1; % reward standard deviation (can be a vector)
+params.probNoReward     = 0; % probability of receiving no reward
+params.rewProb          = 1; % probability of receiving each reward (columns: values)
+params.colormap         = b2r(-1,1);
 
 %% MDP PARAMETERS
 params.gamma            = 0.9; % discount factor
-params.alpha            = 1.0; % learning rate
+params.alpha            = 1; % learning rate
 params.lambda           = 0; % eligibility trace parameter
 params.TLearnRate       = 0.9; % learning rate for the transition matrix (0=uniform; 1=only last)
 params.actPolicy        = 'softmax'; % Choose 'e_greedy' or 'softmax'
@@ -16,6 +22,7 @@ params.preExplore       = true; % Let the agent explore the maze (without reward
 params.Tgoal2start      = true; % Include a transition from goal to start in transition matrix -- this allows Need-term to wrap around
 params.rewOnlyPositive  = true; % When drawing reward+noise samples, truncate negative values to zero
 params.onVSoffPolicy    = 'off-policy'; % Choose 'off-policy' (default, learns Q*) or 'on-policy' (learns Qpi) learning for updating Q-values and computing gain
+params.softmaxT         = 0.2; % soft-max temperature
 
 
 %% PLANNING PARAMETERS

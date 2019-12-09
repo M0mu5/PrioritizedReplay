@@ -15,7 +15,7 @@ params.rewSTD           = 0.1; % reward Gaussian noise (rows: locations; columns
 params.rewProb          = 1; % probability of receiving each reward (columns: values)
 
 %% OVERWRITE PARAMETERS
-params.N_SIMULATIONS    = 100; % number of times to run the simulation
+params.N_SIMULATIONS    = 30; % number of times to run the simulation
 params.MAX_N_STEPS      = 1e5; % maximum number of steps to simulate
 params.MAX_N_EPISODES   = 50; % maximum number of episodes to simulate (use Inf if no max)
 params.nPlan            = 20; % number of steps to do in planning (set to zero if no planning or to Inf to plan for as long as it is worth it)
@@ -26,7 +26,7 @@ params.gamma            = 0.9; % discount factor
 params.softmaxInvT      = 5; % soft-max inverse temperature temperature
 params.tieBreak         = 'min'; % How to break ties on EVM (choose which sequence length is prioritized: 'min', 'max', or 'rand')
 params.setAllGainToOne  = false; % Set the gain term of all items to one (for debugging purposes)
-params.setAllNeedToOne  = true; % Set the need term of all items to one (for debugging purposes)
+params.setAllNeedToOne  = false; % Set the need term of all items to one (for debugging purposes)
 params.setAllNeedToZero = false; % Set the need term of all items to zero, except for the current state (for debugging purposes)
 
 params.PLOT_STEPS       = false; % Plot each step of real experience
@@ -45,7 +45,7 @@ end
 %% RUN SIMULATION
 rng(mean('replay'));
 for k=1:params.N_SIMULATIONS
-    simData(k) = replaySim(params);
+    simData(k) = replaySim_old(params);
 end
 
 
@@ -205,8 +205,8 @@ if saveBool
     set(gcf, 'Clipping', 'off');
     
     set(gcf, 'renderer', 'painters');
-    export_fig(['../Parts/' mfilename], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
-    %print(filename,'-dpdf','-fillpage')
+%     export_fig(['../Parts/' mfilename], '-pdf', '-eps', '-q101', '-nocrop', '-painters');
+    print(['D:\Documents\Perso\Figures_robotics\' mfilename],'-dpdf','-fillpage')
 end
 
 

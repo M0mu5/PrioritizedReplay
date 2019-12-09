@@ -13,7 +13,7 @@ params.rewSTD           = [0.1 0]; % reward Gaussian noise (rows: locations; col
 params.rewProb          = [0.5 0.5]; % probability of receiving each reward (columns: values)
 
 %% OVERWRITE PARAMETERS
-params.N_SIMULATIONS    = 1000; % number of times to run the simulation
+params.N_SIMULATIONS    = 30; % number of times to run the simulation
 params.MAX_N_STEPS      = 1e5; % maximum number of steps to simulate
 params.MAX_N_EPISODES   = 50; % maximum number of episodes to simulate (use Inf if no max)
 params.nPlan            = 20; % number of steps to do in planning (set to zero if no planning or to Inf to plan for as long as it is worth it)
@@ -225,7 +225,7 @@ F_baseline = nanmean(replayF_baseline+preplayF_baseline);
 F_rewShift = nanmean(replayF_rewShift+preplayF_rewShift);
 R_baseline = nanmean(replayR_baseline+preplayR_baseline);
 R_rewShift = nanmean(replayR_rewShift+preplayR_rewShift);
-load('genFig_FvsR_linearTrack.mat','preplayF','replayF','preplayR','replayR')
+load('C:\Users\pablo\Google_Drive\Pro\Annee_Master2\Master\Cours\Robotics\Eval_finale\Code\PrioritizedReplay\Paper\Figure3_FvsR_balance\Code\genFig_FvsR_linearTrack.mat','preplayF','replayF','preplayR','replayR')
 F_orig = nanmean(replayF+preplayF);
 R_orig = nanmean(replayR+preplayR);
 f1 = bar([100*((F_baseline/F_orig)-1) 100*((F_rewShift/F_orig)-1) ; 100*((R_baseline/R_orig)-1) 100*((R_rewShift/R_orig)-1)]);
@@ -240,7 +240,7 @@ set(gcf,'Position',[234         908        1651         341])
 
 %% Replication of Ambrose et al (2016)
 % Equal reward
-load('genFig_FvsR_linearTrack.mat','forwardCount','reverseCount')
+load('C:\Users\pablo\Google_Drive\Pro\Annee_Master2\Master\Cours\Robotics\Eval_finale\Code\PrioritizedReplay\Paper\Figure3_FvsR_balance\Code\genFig_FvsR_linearTrack.mat','forwardCount','reverseCount')
 eqRew_F1 = nansum([forwardCount(:,1),forwardCount(:,6)],2);
 eqRew_F2 = nansum([forwardCount(:,25),forwardCount(:,30)],2);
 eqRew_R1 = nansum([reverseCount(:,1),reverseCount(:,6)],2);

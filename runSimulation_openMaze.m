@@ -17,11 +17,11 @@ params.rewProb          = 1; % probability of receiving each reward (columns: va
 
 
 %% PLOTTING SETTINGS
-params.PLOT_STEPS       = true; % Plot each step of real experience
+params.PLOT_STEPS       = false; % Plot each step of real experience
 params.PLOT_Qvals       = true; % Plot Q-values
 params.PLOT_PLANS       = true; % Plot each planning step
 params.PLOT_EVM         = true; % Plot need and gain
-params.PLOT_TRACE       = false; % Plot all planning traces
+params.PLOT_TRACE       = true; % Plot all planning traces
 params.PLOT_wait        = 1 ; % Number of full episodes completed before plotting
 
 

@@ -9,11 +9,13 @@ params.s_start_rand     = false; % Start at random locations after reaching goal
 params.rewMag           = 1; % reward magnitude (can be a vector)
 params.rewSTD           = 0.5; % reward standard deviation (can be a vector)
 params.probNoReward     = 0; % probability of receiving no reward
+params.rewProb          = 1; % probability of receiving each reward (columns: values)
 
 params.gamma            = 0.95; % Discount factor
 params.embbedPolicy     = true; % Include policy
 params.policy_strength  = 0.8; % Probability that animal will follow optimal policy
 params.zeroDiag         = false; % Set diagonal to zero when calculating the SR
+params.rewOnlyPositive  = true;
 
 saveBool = true; filename = mfilename;
 

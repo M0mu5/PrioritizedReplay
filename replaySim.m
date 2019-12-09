@@ -27,6 +27,7 @@ simData.expList = nan(0,4);
 simData.replay.state = cell(params.MAX_N_STEPS,1);
 simData.replay.action = cell(params.MAX_N_STEPS,1);
 simData.numEpisodes = nan(params.MAX_N_STEPS,1);
+simData.replay.nStep= nan(params.MAX_N_STEPS,1);
 
 simData.replay.gain = cell(params.MAX_N_STEPS,1);
 simData.replay.need = cell(params.MAX_N_STEPS,1);
@@ -345,7 +346,8 @@ for tsi=1:params.MAX_N_STEPS
             expList(size(expList,1)+1,:) = [sti,nan,nan,stp1i]; % Update list of experiences
         end
         st = stp1; sti = stp1i; % Move the agent to the start location
-        ets = [ets; ts]; ts = 0; %#ok<AGROW> % record that we took "ts" timesteps to get to the solution (end state)
+        ets = [ets; ts]; %#ok<AGROW> % record that we took "ts" timesteps to get to the solution (end state)
+        simData.replay.nStep(tsi)= ts ; ts = 0;
         eTr = zeros(size(eTr)); % Reset eligibility matrix
         numEpisodes = numEpisodes+1; % Record that we got to the end
     end
@@ -371,6 +373,7 @@ for tsi=1:params.MAX_N_STEPS
         simData.replay.gain = simData.replay.gain(1:tsi);
         simData.replay.need = simData.replay.need(1:tsi);
         simData.replay.EVM = simData.replay.EVM(1:tsi);
+        simData.replay.nStep = simData.replay.nStep(1:tsi);
         fprintf(repmat('\b', 1, lastsize));
         fprintf('%d steps; %d episodes\n', tsi, numEpisodes);
         break
