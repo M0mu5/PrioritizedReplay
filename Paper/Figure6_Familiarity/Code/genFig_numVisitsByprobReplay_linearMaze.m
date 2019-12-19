@@ -1,4 +1,4 @@
-load_existing_data = true;
+load_existing_data = false;
 addpath('../../../');
 
 % if load_existing_data
@@ -17,7 +17,7 @@ addpath('../../../');
     params.rewProb          = 1; % probability of receiving each reward (columns: values)
     
     %% OVERWRITE PARAMETERS
-    params.N_SIMULATIONS    = 10; % number of times to run the simulation
+    params.N_SIMULATIONS    = 1000; % number of times to run the simulation
     params.MAX_N_STEPS      = 1e5; % maximum number of steps to simulate
     params.MAX_N_EPISODES   = 50; % maximum number of episodes to simulate (use Inf if no max)
     params.nPlan            = 20; % number of steps to do in planning (set to zero if no planning or to Inf to plan for as long as it is worth it)
@@ -34,6 +34,7 @@ addpath('../../../');
     rng(mean('replay'));
     for k=1:params.N_SIMULATIONS
         simData(k) = replaySim(params);
+        fprintf(['Simulation N°' num2str(k) '\n'])
     end
 % end
 
